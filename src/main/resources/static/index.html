@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExpressMovies | Home</title>
+
+<style>
+:root {
+    --green: #173F35;
+    --green-light: #DCE8DF;
+    --ivory: #FAF8F2;
+    --gold: #C6A96B;
+    --text: #252A27;
+    --white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--ivory);
+    color: var(--text);
+}
+
+header {
+    background: var(--green);
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--gold);
+}
+
+.hero {
+    margin: 35px auto;
+    width: 86%;
+    padding: 65px 7%;
+    background: linear-gradient(120deg, #173F35, #315F4F);
+    color: white;
+    border-radius: 22px;
+}
+
+.hero .label {
+    color: var(--gold);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    max-width: 600px;
+    margin: 18px 0;
+    line-height: 1.15;
+}
+
+.hero p {
+    max-width: 500px;
+    line-height: 1.8;
+    color: #E4EBE5;
+}
+
+.hero a {
+    display: inline-block;
+    margin-top: 25px;
+    background: var(--gold);
+    color: #173F35;
+    padding: 13px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.container {
+    width: 86%;
+    margin: 45px auto;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.section-heading h2 {
+    font-size: 28px;
+    color: var(--green);
+}
+
+.search-box {
+    padding: 12px 16px;
+    border: 1px solid #D5DCD5;
+    border-radius: 9px;
+    background: white;
+    width: 270px;
+    max-width: 100%;
+    outline: none;
+}
+
+.search-box:focus {
+    border-color: var(--green);
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+    gap: 24px;
+}
+
+.movie-card {
+    background: white;
+    border: 1px solid #E7E7DF;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 20px #173F350A;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px #173F3518;
+}
+
+.movie-icon {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--green-light);
+    border-radius: 12px;
+    font-size: 44px;
+    margin-bottom: 20px;
+}
+
+.movie-card h3 {
+    color: var(--green);
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.movie-card p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #6B736D;
+}
+
+.movie-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.price {
+    font-weight: bold;
+    color: var(--green);
+    font-size: 19px;
+}
+
+.book-btn {
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 15px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.book-btn:hover {
+    background: #285C4D;
+}
+
+.message {
+    padding: 25px;
+    text-align: center;
+    color: #69736B;
+    line-height: 1.8;
+}
+
+footer {
+    margin-top: 60px;
+    padding: 25px;
+    text-align: center;
+    background: var(--green);
+    color: #E4EBE5;
+    font-size: 13px;
+}
+
+@media(max-width:600px) {
+    header {
+        padding: 20px 6%;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    .hero,
+    .container {
+        width: 90%;
+    }
+
+    .hero {
+        padding: 40px 25px;
+    }
+}
+/* Full screen home page */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+header {
+    height: 75px;
+    padding: 0 5%;
+}
+
+.hero {
+    width: 90%;
+    height: 32vh;
+    min-height: 200px;
+    margin: 20px auto;
+    padding: 25px 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero h1 {
+    font-size: clamp(27px, 3vw, 42px);
+    margin: 10px 0;
+}
+
+.hero p {
+    font-size: 14px;
+}
+
+.hero a {
+    margin-top: 12px;
+    padding: 10px 20px;
+    width: fit-content;
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.section-heading {
+    margin-bottom: 15px;
+}
+
+.section-heading h2 {
+    font-size: 24px;
+}
+
+.movie-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.movie-card {
+    padding: 16px;
+}
+
+.movie-icon {
+    height: 65px;
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.movie-card h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.movie-card p {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.movie-bottom {
+    margin-top: 12px;
+}
+
+footer {
+    padding: 12px;
+    margin-top: 15px;
+}
+
+@media (max-width: 900px) {
+    html,
+    body {
+        height: auto;
+        overflow: auto;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 550px) {
+    .movie-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Express<span>Movies</span></div>
+
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="booking.html">Book Tickets</a>
+        <a href="my-bookings.html">My Bookings</a>
+    </nav>
+</header>
+
+<section class="hero">
+    
+    <h1>Your Next Movie Experience Starts Here.</h1>
+
+    
+    <a href="#movies">Explore Movies &nbsp; →</a>
+</section>
+
+<section class="container" id="movies">
+
+    <div class="section-heading">
+        <h2>Now Showing</h2>
+
+        <input
+            type="text"
+            id="search"
+            class="search-box"
+            placeholder="Search movies..."
+            oninput="filterMovies()">
+    </div>
+
+    <div class="movie-grid" id="movieGrid">
+        <div class="message">Loading movies...</div>
+    </div>
+
+</section>
+
+<footer>
+    © 2026 ExpressMovies | Your Movie, Your Moment
+</footer>
+
+<script>
+let movies = [];
+
+async function loadMovies() {
+    const grid = document.getElementById("movieGrid");
+
+    try {
+        const response = await fetch("/api/movies");
+
+        if (!response.ok) {
+            throw new Error("Unable to load movies");
+        }
+
+        const data = await response.json();
+
+        movies = Array.isArray(data) ? data : [];
+
+        displayMovies(movies);
+
+    } catch (error) {
+        grid.innerHTML = "";
+
+        const message = document.createElement("div");
+        message.className = "message";
+        message.textContent =
+            "Unable to load movies. Please check your Spring Boot server and /api/movies API.";
+
+        grid.appendChild(message);
+    }
+}
+
+function displayMovies(list) {
+    const grid = document.getElementById("movieGrid");
+    grid.innerHTML = "";
+
+    if (list.length === 0) {
+        const message = document.createElement("div");
+        message.className = "message";
+        message.textContent = "No movies found.";
+        grid.appendChild(message);
+        return;
+    }
+
+    list.forEach(movie => {
+        const card = document.createElement("article");
+        card.className = "movie-card";
+
+        const icon = document.createElement("div");
+        icon.className = "movie-icon";
+        icon.textContent = "🎬";
+
+        const title = document.createElement("h3");
+        title.textContent = movie.title || "Untitled Movie";
+
+        const genre = document.createElement("p");
+        genre.textContent = "Genre: " + (movie.genre || "Not specified");
+
+        const language = document.createElement("p");
+        language.textContent = "Language: " + (movie.language || "Not specified");
+
+        const duration = document.createElement("p");
+        duration.textContent = "Duration: " + (movie.duration ?? "N/A");
+
+        const bottom = document.createElement("div");
+        bottom.className = "movie-bottom";
+
+        const price = document.createElement("span");
+        price.className = "price";
+        price.textContent = "₹" + (movie.price ?? 0);
+
+        const button = document.createElement("a");
+        button.className = "book-btn";
+        button.href = "booking.html?movieId=" +
+            encodeURIComponent(movie.id);
+        button.textContent = "Book Now";
+
+        bottom.append(price, button);
+        card.append(icon, title, genre, language, duration, bottom);
+        grid.appendChild(card);
+    });
+}
+
+function filterMovies() {
+    const query = document.getElementById("search").value.toLowerCase();
+
+    const filtered = movies.filter(movie =>
+        (movie.title || "").toLowerCase().includes(query) ||
+        (movie.genre || "").toLowerCase().includes(query) ||
+        (movie.language || "").toLowerCase().includes(query)
+    );
+
+    displayMovies(filtered);
+}
+
+loadMovies();
+</script>
+
+</body>
+</html>
